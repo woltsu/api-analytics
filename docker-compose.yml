@@ -7,9 +7,41 @@ services:
         NODE_ENV: development
       context: .
     command: 'npm run dev'
+    environment:
+      - ELASTICSEARCH_HOST=http://elasticsearch:9200
     ports:
       - 8000:8000
     volumes:
       - .:/app
       - /app/node_modules
     container_name: api_analytics
+    depends_on:
+      - elasticsearch
+
+  grafana:
+    image: grafana/grafana:6.3.6
+    restart: unless-stopped
+    environment:
+      - GF_SECURITY_ADMIN_PASSWORD=admin
+    ports:
+      - "127.0.0.1:9898:3000"
+    volumes:
+      - ./grafana:/var/lib/grafana
+    container_name: grafana
+    depends_on:
+      - elasticsearch
+
+  elasticsearch:
+    image: elasticsearch:5.6.12
+    restart: always
+    environment:
+      - http.host=0.0.0.0
+      - xpack.security.enabled=false
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+    volumes:
+      - ./elasticsearch:/usr/share/elasticsearch/data
+    container_name: elasticsearch
