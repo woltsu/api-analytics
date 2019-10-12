@@ -44,6 +44,9 @@ spec:
             limits:
               cpu: 0.5
               memory: 1024Mi
+          env:
+            - name: GF_SECURITY_ADMIN_PASSWORD
+              value: "admin"
 
         - image: elasticsearch:5.6.12
           name: api-analytics-elasticsearch

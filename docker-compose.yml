@@ -24,7 +24,7 @@ services:
     environment:
       - GF_SECURITY_ADMIN_PASSWORD=admin
     ports:
-      - "127.0.0.1:9898:3000"
+      - 9898:3000
     volumes:
       - ./grafana:/var/lib/grafana
     container_name: grafana
