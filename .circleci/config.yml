@@ -60,7 +60,8 @@ jobs:
             fi
             kubectl apply -f ./manifests/service.yaml -f ./manifests/deployment.yaml
             kubectl patch deployment -n ${namespace} ${service} -p  "{\"spec\":{\"template\":{\"metadata\":{\"labels\":{\"date\":\"`date +'%s'`\"}}}}}"
-            kubectl expose deployment -n ${namespace} ${service} --type=LoadBalancer --name=${service}-lb --port=8000 --port=9898
+            kubectl expose deployment -n ${namespace} ${service} --type=LoadBalancer --name=${service}-lb --port=8000
+            kubectl expose deployment -n ${namespace} ${service} --type=LoadBalancer --name=${service}-lb2 --port=9898
             kubectl get all -n ${namespace} | grep ${service}
             kubectl describe -n ${namespace} service/${service}-lb || true
 
