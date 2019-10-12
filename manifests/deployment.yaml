@@ -75,7 +75,7 @@ spec:
               value: "-Xms512m -Xmx512m"
       
       securityContext:
-          runAsUser: 0
+        runAsUser: 0
 
       nodeSelector:
         cloud.google.com/gke-nodepool: workshop-pool
