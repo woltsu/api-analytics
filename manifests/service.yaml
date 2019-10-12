@@ -14,7 +14,7 @@ spec:
       protocol: TCP
       targetPort: 8000
     - name: api-analytics-grafana
-      port: 9898
+      port: 3000
       protocol: TCP
       targetPort: 3000
   selector:
