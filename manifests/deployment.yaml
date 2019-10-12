@@ -44,7 +44,7 @@ spec:
             limits:
               cpu: 0.5
               memory: 1024Mi
-          environment:
+          env:
             - name: GF_SECURITY_ADMIN_PASSWORD
               value: admin123
 
