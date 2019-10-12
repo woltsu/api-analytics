@@ -53,6 +53,8 @@ spec:
               value: Admin
             - name: GF_SECURITY_ADMIN_PASSWORD
               value: "admin"
+            - name: GF_INSTALL_PLUGINS
+              value: "grafana-kubernetes-app"
 
         - image: elasticsearch:5.6.12
           name: api-analytics-elasticsearch
