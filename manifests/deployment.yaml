@@ -67,6 +67,7 @@ spec:
               value: "-Xms512m -Xmx512m"
       
       securityContext:
+        runAsUser: 472
         fsGroup: 472
 
       nodeSelector:
