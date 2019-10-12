@@ -58,12 +58,16 @@ jobs:
             if kubectl get service ${service}-lb -n ${namespace} > /dev/null; then
               kubectl delete service ${service}-lb -n ${namespace};
             fi
+            if kubectl get service ${service}-lb2 -n ${namespace} > /dev/null; then
+              kubectl delete service ${service}-lb2 -n ${namespace};
+            fi
             kubectl apply -f ./manifests/service.yaml -f ./manifests/deployment.yaml
             kubectl patch deployment -n ${namespace} ${service} -p  "{\"spec\":{\"template\":{\"metadata\":{\"labels\":{\"date\":\"`date +'%s'`\"}}}}}"
             kubectl expose deployment -n ${namespace} ${service} --type=LoadBalancer --name=${service}-lb --port=8000
             kubectl expose deployment -n ${namespace} ${service} --type=LoadBalancer --name=${service}-lb2 --port=9898
             kubectl get all -n ${namespace} | grep ${service}
             kubectl describe -n ${namespace} service/${service}-lb || true
+            kubectl describe -n ${namespace} service/${service}-lb2 || true
 
 workflows:
   build_update_deploy:
